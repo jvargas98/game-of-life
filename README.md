@@ -1,4 +1,3 @@
-# game-of-life
 ## Conway's Game of Life
 ### Rules for Conway's Game of Life
 At the heart of this game are four rules that determine if a cell is live or dead. All depend on how many of that cell's neighbors are alive.
