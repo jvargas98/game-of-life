@@ -7,9 +7,9 @@ class Board
   end
 
   def draw(matrix_cells)
-    for i in 0...@width
-      for j in 0...@height
-        print matrix_cells[i][j]
+    for i in 0...@height
+      for j in 0...@width
+        print matrix_cells[i, j]
       end
       puts
     end
