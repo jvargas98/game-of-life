@@ -6,30 +6,32 @@ require_relative 'cell'
 require_relative 'board'
 
 class GameOfLive
+  attr_reader :rows, :cols
+
   def initialize(width, height)
     @rows = height
     @cols = width
-    @matrix_cells = Matrix.build(height, width) { Cell.new(rand(0..1) == 1) }
     @board = Board.new(width, height)
+    @matrix_cells = Matrix.build(height, width) { Cell.new(rand(0..1) == 1) }
   end
 
-  def evaluate_life(matrix)
+  def evaluate(matrix)
     matrix_cells_next = Matrix.build(@rows, @cols) { Cell.new }
     (0...@rows).each do |row|
       (0...@cols).each do |col|
-        state = matrix[row, col].state
+        cell = matrix[row, col]
         neighbors = count_neighbors(matrix, row, col)
-        matrix_cells_next[row, col].state = eveluate_rules(state, neighbors)
+        matrix_cells_next[row, col].state = eveluate_rules(cell, neighbors)
       end
     end
     matrix_cells_next
   end
 
-  def eveluate_rules(cell_state, neighbors)
-    return true if !cell_state && neighbors == 3 # Birth
-    return false if cell_state && neighbors < 2 || neighbors > 3 # Die
+  def eveluate_life(cell, neighbors)
+    return true if !cell.is_alive? && neighbors == 3 # Birth
+    return false if cell.is_alive? && neighbors < 2 || neighbors > 3 # Die
 
-    cell_state # surive
+    cell.state # surive
   end
 
   def count_neighbors(matrix, row, col)
@@ -46,7 +48,7 @@ class GameOfLive
   def play
     loop do
       sleep(0.5)
-      @matrix_cells = evaluate_life(@matrix_cells)
+      @matrix_cells = evaluate(@matrix_cells)
       @board.draw(@matrix_cells)
     end
   end

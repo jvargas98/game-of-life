@@ -17,30 +17,30 @@ RSpec.describe 'Game of life' do
 
   it 'a dead cell with 3 neighbors born in the next generation' do
     neighbors = 3
-    expect(game_of_life.eveluate_rules(cell.state, neighbors)).to be true
+    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
   end
 
   it 'a living cell with 1 neighbor or less die in the next generation' do
     neighbors = 1
     cell.state = true
-    expect(game_of_life.eveluate_rules(cell.state, neighbors)).to be false
+    expect(game_of_life.eveluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 4 or more neighbors die in the next generation' do
     neighbors = 4
     cell.state = true
-    expect(game_of_life.eveluate_rules(cell.state, neighbors)).to be false
+    expect(game_of_life.eveluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 2 neighbors remain alive in the next generation' do
     neighbors = 2
     cell.state = true
-    expect(game_of_life.eveluate_rules(cell.state, neighbors)).to be true
+    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
   end
 
   it 'a living cell with 2 neighbors remain alive in the next generation' do
     neighbors = 3
     cell.state = true
-    expect(game_of_life.eveluate_rules(cell.state, neighbors)).to be true
+    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
   end
 end

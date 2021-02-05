@@ -15,11 +15,11 @@ RSpec.describe 'Cell' do
   end
 
   it 'dies' do
-    expect(cell_alive.change_state).to be false
+    expect(cell_alive.state = false).to be false
   end
 
   it 'revive' do
-    expect(cell_deth.change_state).to be true
+    expect(cell_deth.state = true).to be true
   end
 
   it 'return ■ if cell is alive' do
