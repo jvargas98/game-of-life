@@ -1,7 +1,9 @@
-require "matrix"
-require "prime"
-require_relative "cell.rb"
-require_relative "board.rb"
+# frozen_string_literal: true
+
+require 'matrix'
+require 'prime'
+require_relative 'cell'
+require_relative 'board'
 
 class GameOfLive
   def initialize(width, height)

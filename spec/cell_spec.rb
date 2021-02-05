@@ -1,30 +1,32 @@
-require_relative "../lib/cell.rb"
+# frozen_string_literal: true
 
-RSpec.describe "Cell" do
+require_relative '../lib/cell'
+
+RSpec.describe 'Cell' do
   let(:cell_alive) { Cell.new(true) }
   let(:cell_deth) { Cell.new }
 
-  it "is alive" do
+  it 'is alive' do
     expect(cell_alive.state).to be true
   end
 
-  it "is deth" do
+  it 'is deth' do
     expect(cell_deth.state).to be false
   end
 
-  it "dies" do
+  it 'dies' do
     expect(cell_alive.change_state).to be false
   end
 
-  it "revive" do
+  it 'revive' do
     expect(cell_deth.change_state).to be true
   end
 
-  it "return ■ if cell is alive" do
-    expect(cell_alive.to_s).to eq "■ "
+  it 'return ■ if cell is alive' do
+    expect(cell_alive.to_s).to eq '■ '
   end
 
-  it "return . if cell is alive" do
-    expect(cell_deth.to_s).to eq ". "
+  it 'return . if cell is alive' do
+    expect(cell_deth.to_s).to eq '. '
   end
 end

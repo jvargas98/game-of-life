@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Board
   attr_reader :width, :height
 
@@ -7,8 +9,8 @@ class Board
   end
 
   def draw(matrix_cells)
-    for i in 0...@height
-      for j in 0...@width
+    (0...@height).each do |i|
+      (0...@width).each do |j|
         print matrix_cells[i, j]
       end
       puts

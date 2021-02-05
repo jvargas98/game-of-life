@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cell
   attr_accessor :state
 
@@ -10,6 +12,6 @@ class Cell
   end
 
   def to_s
-    @state ? "■ " : ". "
+    @state ? '■ ' : '. '
   end
 end
