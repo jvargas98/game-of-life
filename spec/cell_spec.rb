@@ -19,4 +19,12 @@ RSpec.describe "Cell" do
   it "revive" do
     expect(cell_deth.change_state).to be true
   end
+
+  it "return ■ if cell is alive" do
+    expect(cell_alive.to_s).to eq "■ "
+  end
+
+  it "return . if cell is alive" do
+    expect(cell_deth.to_s).to eq ". "
+  end
 end
