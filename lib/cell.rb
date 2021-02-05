@@ -7,8 +7,8 @@ class Cell
     @state = state
   end
 
-  def change_state
-    @state = !@state
+  def is_alive?
+    @state
   end
 
   def to_s
