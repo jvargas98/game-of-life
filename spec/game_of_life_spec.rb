@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'byebug'
 require_relative '../lib/game_of_life'
 require_relative '../lib/cell'
 
@@ -15,6 +16,10 @@ RSpec.describe 'Game of life' do
     expect(game_of_life.count_neighbors(matrix, 1, 1)).to eq 3
   end
 
+  before do
+    cell.state = true
+  end
+
   it 'a dead cell with 3 neighbors born in the next generation' do
     neighbors = 3
     expect(game_of_life.eveluate_life(cell, neighbors)).to be true
@@ -22,25 +27,21 @@ RSpec.describe 'Game of life' do
 
   it 'a living cell with 1 neighbor or less die in the next generation' do
     neighbors = 1
-    cell.state = true
     expect(game_of_life.eveluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 4 or more neighbors die in the next generation' do
     neighbors = 4
-    cell.state = true
     expect(game_of_life.eveluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 2 neighbors remain alive in the next generation' do
     neighbors = 2
-    cell.state = true
     expect(game_of_life.eveluate_life(cell, neighbors)).to be true
   end
 
-  it 'a living cell with 2 neighbors remain alive in the next generation' do
+  it 'a living cell with 3 neighbors remain alive in the next generation' do
     neighbors = 3
-    cell.state = true
     expect(game_of_life.eveluate_life(cell, neighbors)).to be true
   end
 end
