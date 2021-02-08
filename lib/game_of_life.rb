@@ -28,10 +28,13 @@ class GameOfLive
   end
 
   def eveluate_life(cell, neighbors)
-    return true if !cell.is_alive? && neighbors == 3 # Birth
-    return false if cell.is_alive? && neighbors < 2 || neighbors > 3 # Die
+    # Birth
+    return true if !cell.is_alive? && neighbors == 3
+    # Die
+    return false if cell.is_alive? && neighbors < 2 || neighbors > 3
 
-    cell.state # surive
+    # Survive
+    cell.state
   end
 
   def count_neighbors(matrix, row, col)
