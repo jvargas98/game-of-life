@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Save the state of the cell
+# true is a living cell
 class Cell
   attr_accessor :state
 
@@ -7,8 +9,12 @@ class Cell
     @state = state
   end
 
-  def is_alive?
-    @state
+  def alive?
+    @state == true
+  end
+
+  def dead?
+    @state == false
   end
 
   def to_s
