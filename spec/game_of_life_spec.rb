@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require 'byebug'
 require_relative '../lib/game_of_life'
 require_relative '../lib/cell'
 
 RSpec.describe 'Game of life' do
-  let(:game_of_life) { GameOfLive.new(3, 3) }
+  let(:game_of_life) { GameOfLife.new(3, 3) }
   let(:cell) { Cell.new }
   let(:matrix) { Matrix.build(3, 3) { Cell.new } }
 
@@ -22,26 +21,26 @@ RSpec.describe 'Game of life' do
 
   it 'a dead cell with 3 neighbors born in the next generation' do
     neighbors = 3
-    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
+    expect(game_of_life.evaluate_life(cell, neighbors)).to be true
   end
 
   it 'a living cell with 1 neighbor or less die in the next generation' do
     neighbors = 1
-    expect(game_of_life.eveluate_life(cell, neighbors)).to be false
+    expect(game_of_life.evaluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 4 or more neighbors die in the next generation' do
     neighbors = 4
-    expect(game_of_life.eveluate_life(cell, neighbors)).to be false
+    expect(game_of_life.evaluate_life(cell, neighbors)).to be false
   end
 
   it 'a living cell with 2 neighbors remain alive in the next generation' do
     neighbors = 2
-    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
+    expect(game_of_life.evaluate_life(cell, neighbors)).to be true
   end
 
   it 'a living cell with 3 neighbors remain alive in the next generation' do
     neighbors = 3
-    expect(game_of_life.eveluate_life(cell, neighbors)).to be true
+    expect(game_of_life.evaluate_life(cell, neighbors)).to be true
   end
 end
