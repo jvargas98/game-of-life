@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'matrix'
-require 'prime'
 require_relative 'cell'
 require_relative 'board'
 
-class GameOfLive
+# GameOfLife contains the rules and all logic of the game
+class GameOfLife
   attr_reader :rows, :cols
 
   def initialize(width, height)
@@ -19,19 +19,17 @@ class GameOfLive
     matrix_cells_next = Matrix.build(@rows, @cols) { Cell.new }
     (0...@rows).each do |row|
       (0...@cols).each do |col|
-        cell = matrix[row, col]
-        neighbors = count_neighbors(matrix, row, col)
-        matrix_cells_next[row, col].state = eveluate_rules(cell, neighbors)
+        matrix_cells_next[row, col].state = evaluate_life(matrix[row, col], count_neighbors(matrix, row, col))
       end
     end
     matrix_cells_next
   end
 
-  def eveluate_life(cell, neighbors)
+  def evaluate_life(cell, neighbors)
     # Birth
-    return true if !cell.is_alive? && neighbors == 3
+    return true if cell.dead? && neighbors == 3
     # Die
-    return false if cell.is_alive? && neighbors < 2 || neighbors > 3
+    return false if cell.alive? && neighbors < 2 || neighbors > 3
 
     # Survive
     cell.state
@@ -39,13 +37,12 @@ class GameOfLive
 
   def count_neighbors(matrix, row, col)
     sum = 0
-    (-1..1).each do |i|
-      (-1..1).each do |j|
-        sum += matrix[(row + i + @rows) % @rows, (col + j + @cols) % @cols].state ? 1 : 0
+    (-1..1).each do |row_iterator|
+      (-1..1).each do |col_iterator|
+        sum += matrix[(row + row_iterator + @rows) % @rows, (col + col_iterator + @cols) % @cols].state ? 1 : 0
       end
     end
     sum -= (matrix[row, col].state ? 1 : 0)
-    sum
   end
 
   def play
@@ -57,5 +54,5 @@ class GameOfLive
   end
 end
 
-# game = GameOfLive.new(40, 60)
+# game = GameOfLife.new(40, 60)
 # game.play
